@@ -1,0 +1,6 @@
+<ul>
+    <ng-container *ngFor="let car of cars">
+        <li>{{car.name}}</li>
+        <app-car-item [cars]="car.children"></app-car-item>
+    </ng-container>
+</ul>
