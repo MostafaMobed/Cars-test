@@ -12,6 +12,17 @@ export class CarItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if(this.cars)
+      this.cars = this.sort_by_key(this.cars, 'name');
+  }
+
+sort_by_key(array: any[], key: string)
+  {
+    return array.sort(function(a, b)
+      {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      });
   }
 
 }
