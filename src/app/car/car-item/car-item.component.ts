@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ICar } from 'src/app/models/icar';
 
 @Component({
   selector: 'app-car-item',
@@ -7,14 +10,42 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CarItemComponent implements OnInit {
 
-  @Input('cars') cars: any[] = [];
+  cars: ICar[] = [];
+  @Input('carsSub') carsSub: BehaviorSubject<any> = new BehaviorSubject([]);
 
-  constructor() { }
+  private _unsubscribeAll: Subject<any>;
+
+  constructor() {
+    this._unsubscribeAll = new Subject();
+   }
 
   ngOnInit(): void {
-    if(this.cars)
-      this.cars = this.sort_by_key(this.cars, 'name');
+    
+    this.carsSub
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(
+      cars =>
+      {
+        if(cars) 
+        {
+          this.cars = this.sort_by_key(cars, 'name');
+
+          this.cars.forEach(car => {
+            car.carsChildrenSub = new BehaviorSubject(car.children)
+          });
+        }
+
+      }
+    );
   }
+
+  ngOnDestroy(): void
+  {
+      // Unsubscribe from all subscriptions
+      this._unsubscribeAll.next();
+      this._unsubscribeAll.complete();
+  }
+
 
 sort_by_key(array: any[], key: string)
   {

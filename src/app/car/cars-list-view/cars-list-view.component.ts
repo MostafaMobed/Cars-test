@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../car.service';
+import { finalize } from 'rxjs/operators'
+import { BehaviorSubject } from 'rxjs';
+import { ICar } from 'src/app/models/icar';
 
 @Component({
   selector: 'app-cars-list-view',
@@ -8,19 +11,37 @@ import { CarService } from '../car.service';
 })
 export class CarsListViewComponent implements OnInit {
 
-  cars: any[] = [];
+  cars: ICar[] = [];
+  carsSub: BehaviorSubject<any> = new BehaviorSubject([]);
+  loading: boolean = false;
 
   constructor(private _carSrv: CarService) { }
 
   ngOnInit(): void {
 
+    this.getCars();
+
+  }
+
+  getCars() {
+    this.loading = true;
     //get cars list from api
-    this._carSrv.getCars().subscribe(
+    this._carSrv.getCars()
+    .pipe(finalize(() => { this.loading = false}))
+    .subscribe(
       cars => {
         this.cars = cars;
-        console.log(cars);
+        this.carsSub.next(this.cars);
+      },
+      error => {
+        //error alert
       }
-    )
+    );
+  }
+
+
+  updateCars() {
+    this.getCars();
   }
 
 }

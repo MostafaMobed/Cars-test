@@ -2,7 +2,8 @@
     <ng-container *ngFor="let car of cars">
         <ng-container *ngIf="car.include">
             <li>{{car.name}}</li>
-            <app-car-item [cars]="car.children"></app-car-item>
+            <app-car-item *ngIf="car.carsChildrenSub" [carsSub]="car.carsChildrenSub">
+            </app-car-item>
         </ng-container>
     </ng-container>
 </ul>

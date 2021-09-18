@@ -1,1 +1,7 @@
-<app-car-item [cars]="cars"></app-car-item>
+<button (click)="updateCars()" [disabled]="loading">
+  Update Cars
+</button>
+
+<div *ngIf="loading">Please wait...</div>
+
+<app-car-item *ngIf="!loading" [carsSub]="carsSub"></app-car-item>
