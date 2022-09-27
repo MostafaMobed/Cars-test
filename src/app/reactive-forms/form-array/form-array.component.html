@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup">
+  <div formArrayName="selects">
+    <div *ngFor="let ctrl of controlsArray; let i=index;" [formGroupName]="i">
+      Position {{i + 1}}:
+      <select (change)="refreshOrder(i+1)" formControlName="name">
+        <option *ngFor="let option of options" [value]="option">{{option}}</option>
+      </select>
+      <button *ngIf="i>0" (click)="move(i, -1)">move up</button>
+      <button *ngIf="controlsArray.length-1>i" (click)="move(i, 1)">move down</button>
+      <hr>
+    </div>
+  </div>
+</form>
+
+<h2>Traditional:</h2>
+<div>
+  <div *ngFor="let key of orderedKeys; let i=index;">
+    Position {{i + 1}}:
+    <select (change)="changePosition($event, i+1)">
+        <option *ngFor="let option of options" [value]="option" [selected]="flag&&(option === object[key].name)">{{option}}</option>
+    </select>
+    <hr>
+  </div> 
+</div>
