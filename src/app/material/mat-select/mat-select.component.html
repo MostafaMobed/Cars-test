@@ -1,0 +1,7 @@
+<div *ngFor="let element of elements; let i=index;">
+  <mat-select multiple class="dw-input" [(ngModel)]="values[i].txn_type_ids" (selectionChange)="logValues()">
+    <mat-option *ngFor="let row of txnTypeList" value="{{row.id}}">{{row.name}}</mat-option>
+   </mat-select>
+</div>
+
+<!-- [value]="element.txn_type_id ? element.txn_type_id.split(',') : []" -->

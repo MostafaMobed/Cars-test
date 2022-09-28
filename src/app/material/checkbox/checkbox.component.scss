@@ -1,0 +1,11 @@
+:host ::ng-deep .mat-checkbox-checked.mat-accent:not(.mat-checkbox-disabled) .mat-checkbox-background {
+  background-color: green !important;
+}
+
+:host  ::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: green !important;
+}
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent:not(.mat-checkbox-disabled) .mat-checkbox-background svg path {
+  stroke: white !important;
+}

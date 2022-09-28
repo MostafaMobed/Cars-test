@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'reactive-forms',
     loadChildren: () => import('./reactive-forms/reactive-forms.module').then(m => m.ReactiveFormsExampleModule)
+  },
+  {
+    path: 'material',
+    loadChildren: () => import('./material/material.module').then(m => m.MaterialModule)
   }
 ];
 
