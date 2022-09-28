@@ -6,6 +6,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FakeDbService } from './fake-db/fake-db.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FakeDbService } from './fake-db/fake-db.service';
       passThruUnknownUrl: true,
       host: 'localhost'
   }),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
