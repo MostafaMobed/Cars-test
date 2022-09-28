@@ -1,0 +1,19 @@
+<table>
+  <tbody>
+    <tr *ngFor="let row of items | slice:0:ceil(items.length/numberOfCols); let i=index;">
+      <td *ngFor="let col of items | slice:0:numberOfCols; let j=index;">
+        {{ items[ i*numberOfCols + j ] }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<table>
+  <tbody>
+    <tr *ngFor="let row of items | slice:0:ceil(items.length/numberOfCols); let i=index;">
+      <td *ngFor="let col of items | slice:0:numberOfCols; let j=index;">
+        {{ items[ j*ceil(items.length/numberOfCols) + i ] }}
+      </td>
+    </tr>
+  </tbody>
+</table>

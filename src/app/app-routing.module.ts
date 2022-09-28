@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'material',
     loadChildren: () => import('./material/material.module').then(m => m.MaterialModule)
+  },
+  {
+    path: 'basics',
+    loadChildren: () => import('./angular-basics/angular-basics.module').then(m => m.AngularBasicsModule)
   }
 ];
 
